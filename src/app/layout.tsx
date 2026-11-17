@@ -31,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
 
         {/* Main Content */}
-        <main className="w-full max-w-6xl mx-auto px-4 py-8">
+        <main className="w-full max-w-6xl mx-auto px-4 py-8 space-y-12">
           {children}
         </main>
 
