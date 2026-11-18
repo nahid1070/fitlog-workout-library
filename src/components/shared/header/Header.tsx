@@ -1,15 +1,20 @@
+'use client';
+
 import Link from "next/link";
 import NavButtons from "./Navbuttons";
+import { usePathname } from "next/navigation";
 
 function Header() {
+
+  const pathname = usePathname();
   
   // NavLink Items
   const navLins = <>
     <li>
-          <Link href={'/'} className="rounded-[0.73rem] text-brand-heading"> Workouts</Link>
+          <Link href={'/'} className={`rounded-[0.73rem] text-brand-heading ${pathname === '/' && `text-brand-primary bg-base-content/5 font-bold`}`}> Workouts</Link>
       </li>
       <li>
-          <Link href={'/my-plan'} className="rounded-[0.73rem] text-brand-heading">My Plan</Link>
+          <Link href={'/my-plan'} className={`rounded-[0.73rem] text-brand-heading ${pathname === '/my-plan' && `text-brand-primary bg-base-content/5 font-bold`}`}>My Plan</Link>
     </li>
   </>
   
@@ -17,6 +22,7 @@ function Header() {
     <header className="bg-brand-body border-b border-brand-border shadow-sm">
       <div className="navbar w-full max-w-6xl mx-auto">
         <div className="navbar-start">
+          {/* Mobile Menu Part */}
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -53,6 +59,8 @@ function Header() {
           </Link>
 
         </div>
+
+        {/* Desktop Menu Part */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             {navLins}
