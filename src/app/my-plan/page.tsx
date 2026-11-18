@@ -4,6 +4,7 @@ import NoFitData from "@/components/my-plan/NoFitData";
 import SavedPlanCard from "@/components/my-plan/SavedPlanCard";
 import TodaysPlanCard from "@/components/my-plan/TodaysPlanCard";
 import { FitLibraryContext } from "@/contexts/FitLibraryContext";
+import { IFitlog } from "@/types/fitlog.type";
 import { useContext, useState } from "react";
 
 function MyPlan() {
@@ -13,6 +14,33 @@ function MyPlan() {
 
     // Using Context to get the MyPlan and Save data
     const {plan, setPlan, save, setSave} = useContext(FitLibraryContext);
+
+    // Declaring State to handle Sorting data
+    const [sortBy, setSortedBy] = useState<'duration' | 'calories' | 'rating'>('duration');
+
+    // Sort Logic
+    const sortingMyPlan = (myplans: IFitlog[]) => {
+
+        const sortedData = [...myplans];
+        
+        if ( sortBy === 'duration' ) {
+            sortedData.sort( (a, b) => a.duration - b.duration ); 
+
+        } else if ( sortBy === 'calories' ) {
+            sortedData.sort( (a, b) => a.caloriesBurned - b.caloriesBurned );
+
+        } else if ( sortBy === 'rating' ) {
+            sortedData.sort( (a, b) => b.rating - a.rating );
+        }
+
+        return sortedData;
+        
+    }
+
+    // Storing Sorted Plan Data
+    const sortedPlans = sortingMyPlan(plan);
+    const sortedSave = sortingMyPlan(save);
+
 
 
     // Get the Total Duration and Calories From the Plan Data
@@ -93,7 +121,18 @@ function MyPlan() {
                 </div>
 
                 <div>
-                    Sorting
+                    <p className="text-gray-100 mb-2">Sort By</p>
+
+                    <select
+                        onChange={ (e) => setSortedBy(e.target.value as 'duration' | 'calories' | 'rating') } 
+                        defaultValue="duration" 
+                        className="select w-xs bg-black rounded-2xl"
+                    >
+                        <option value={"duration"}>Duration</option>
+                        <option value={"calories"}>Calories</option>
+                        <option value={"rating"}>Rating</option>
+                    </select>
+                    
                 </div>
             </div>
 
@@ -104,7 +143,7 @@ function MyPlan() {
 
                     // If Saved Data is Available
                     tab === 'saved' && hasSaved > 0 ?
-                        save.map( savedPlan => 
+                        sortedSave.map( savedPlan => 
                         <SavedPlanCard 
                             key={savedPlan.id} 
                             savedPlan={savedPlan}
@@ -120,7 +159,7 @@ function MyPlan() {
                 {
                     // If TodaysPlan Data is Available
                     tab === 'plan' && hasPlan > 0 ?
-                        plan.map( todaysPlan => 
+                        sortedPlans.map( todaysPlan => 
                         <TodaysPlanCard 
                             key={todaysPlan.id} 
                             todaysPlan={todaysPlan} 
