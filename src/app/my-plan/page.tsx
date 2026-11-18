@@ -47,7 +47,7 @@ function MyPlan() {
             </div>
 
             {/* Plan Stats */}
-            <div className="stats stats-vertical lg:stats-horizontal shadow-none w-full bg-surface rounded-2xl border border-brand-border">
+            <div className="stats stats-vertical sm:stats-horizontal shadow-none w-full bg-surface rounded-2xl border border-brand-border">
                 <div className="stat">
                     <div className="stat-title">Exercises</div>
                     <div className="stat-value text-brand-primary">
@@ -73,8 +73,8 @@ function MyPlan() {
                 </div>
             </div>
 
-            {/* Todays Plan and Saved Details */}
-            <div className="flex items-center justify-between gap-4">
+            {/* Tabs Buttons - Todays Plan and Saved */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div role="tablist" className="tabs tabs-box rounded-2xl bg-surface w-fit">
                     <button
                         onClick={todaysPlanButtonHandler}
@@ -96,6 +96,7 @@ function MyPlan() {
                 </div>
             </div>
 
+            {/* Todays Plan and Saved Details */}
             <div className="space-y-4">
     
                 {

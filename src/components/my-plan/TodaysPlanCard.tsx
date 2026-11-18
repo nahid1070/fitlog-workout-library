@@ -21,9 +21,9 @@ function TodaysPlanCard({ todaysPlan } : TodaysPlanCardProps ) {
 
     return (
        <>
-        <div className="flex items-center gap-4 bg-surface p-4 rounded-2xl border border-brand-border">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-surface p-4 rounded-2xl border border-brand-border">
             {/* Image */}
-            <div className="relative w-36 h-28 overflow-hidden rounded-2xl">
+            <div className="relative w-full sm:w-36 h-28 overflow-hidden rounded-2xl">
                 <Image 
                     src={image} 
                     width={200} 
@@ -37,7 +37,7 @@ function TodaysPlanCard({ todaysPlan } : TodaysPlanCardProps ) {
             <div className="flex-1">
                 <h2 className="text-xl">{name}</h2>
                 <p>{equipment}</p>
-                <div className="flex flex-wrap items-center gap-4 text-sm mt-2">
+                <div className="flex flex-wrap sm:items-center gap-4 text-sm mt-2">
                     <span 
                         className="inline-flex items-center gap-1">
                             <Clock color="#c4f000" className="w-4" />{duration} min

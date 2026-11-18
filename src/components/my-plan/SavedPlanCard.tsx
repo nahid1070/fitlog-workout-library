@@ -1,5 +1,5 @@
 import { IFitlog } from "@/types/fitlog.type";
-import { Clock, Flame, Star } from "lucide-react";
+import { Clock, Flame, Star, X } from "lucide-react";
 import Image from "next/image";
 
 interface SavedPlanCardProps {
@@ -21,9 +21,9 @@ function SavedPlanCard({ savedPlan } : SavedPlanCardProps ) {
 
     return (
        <>
-        <div className="flex items-center gap-4 bg-surface p-4 rounded-2xl border border-brand-border">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-surface p-4 rounded-2xl border border-brand-border">
             {/* Image */}
-            <div className="relative w-36 h-28 overflow-hidden rounded-2xl">
+            <div className="relative w-full sm:w-36 h-28 overflow-hidden rounded-2xl">
                 <Image 
                     src={image} 
                     width={200} 
@@ -60,8 +60,8 @@ function SavedPlanCard({ savedPlan } : SavedPlanCardProps ) {
                     View Details
                 </button>
 
-                <button className="btn rounded-2xl btn-sm bg-transparent">
-                    x
+                <button className="btn rounded-2xl btn-sm bg-transparent w-10">
+                    <X color="#ffffff" />
                 </button>
 
             </div>

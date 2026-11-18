@@ -49,7 +49,7 @@ async function LibraryDetail({ params } : ParamsProps) {
     return (
         <>
         <div className="grid lg:grid-cols-2 gap-10">
-            <div className="relative h-72 lg:min-h-72 rounded-2xl overflow-hidden">
+            <div className="relative h-72 lg:min-h-72 lg:h-full rounded-2xl overflow-hidden">
                 <Image src={image} width={1200} height={1200} alt="Fit Image" className="object-cover w-full h-full"/>
             </div>
 
