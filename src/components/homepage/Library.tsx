@@ -3,9 +3,11 @@ import LibraryCard from "../shared/LibraryCard";
 
 // Creating Promise To Fetch Data
 const getFitlogData = async () => {
+    ''
+
     try{
 
-        const res = await fetch('https://api.abcz.workers.dev/api/fitlog', {'next' : {'revalidate' : 600}});
+        const res = await fetch('https://api.abcz.workers.dev/api/fitlog', { cache: 'no-store' });
 
         if (!res.ok) {
             throw new Error(`HTTP error! Status: ${res.status}`);
