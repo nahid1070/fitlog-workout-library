@@ -12,7 +12,8 @@ function MyPlan() {
     const [tab, setTab] = useState('plan');
 
     // Using Context to get the MyPlan and Save data
-    const {plan, save} = useContext(FitLibraryContext);
+    const {plan, setPlan, save, setSave} = useContext(FitLibraryContext);
+
 
     // Get the Total Duration and Calories From the Plan Data
     const totalPlanMinutes = plan.reduce( (acc, data) => acc + data.duration, 0);
@@ -104,7 +105,12 @@ function MyPlan() {
                     // If Saved Data is Available
                     tab === 'saved' && hasSaved > 0 ?
                         save.map( savedPlan => 
-                        <SavedPlanCard key={savedPlan.id} savedPlan={savedPlan} />
+                        <SavedPlanCard 
+                            key={savedPlan.id} 
+                            savedPlan={savedPlan}
+                            save={save}
+                            setSave={setSave} 
+                        />
 
                     ) : 
                     // If it's saved tab and not data is available
@@ -115,7 +121,12 @@ function MyPlan() {
                     // If TodaysPlan Data is Available
                     tab === 'plan' && hasPlan > 0 ?
                         plan.map( todaysPlan => 
-                        <TodaysPlanCard key={todaysPlan.id} todaysPlan={todaysPlan} />
+                        <TodaysPlanCard 
+                            key={todaysPlan.id} 
+                            todaysPlan={todaysPlan} 
+                            plan={plan} 
+                            setPlan={setPlan} 
+                        />
 
                     ) : 
                     

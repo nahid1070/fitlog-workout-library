@@ -1,15 +1,20 @@
 import { IFitlog } from "@/types/fitlog.type";
 import { Check, Clock, Flame, Star, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import toast from "react-hot-toast";
 
 interface TodaysPlanCardProps {
+    plan: IFitlog[];
+    setPlan: React.Dispatch<React.SetStateAction<IFitlog[] | []>>;
     todaysPlan: IFitlog;
 }
 
-function TodaysPlanCard({ todaysPlan } : TodaysPlanCardProps ) {
+function TodaysPlanCard({ todaysPlan, plan, setPlan } : TodaysPlanCardProps ) {
 
+    // Distructuring Todays Plan data
     const {
-
+        id,
         name, 
         image, 
         equipment, 
@@ -18,6 +23,30 @@ function TodaysPlanCard({ todaysPlan } : TodaysPlanCardProps ) {
         rating
 
     } = todaysPlan;
+
+    // Mark as Done Button Handler - Marked a plan
+    const doneButtonHandler = () => {
+        //filter out the marked as done data    
+        const newTodaysPlan = plan.filter( data => data.id !== id );
+
+        // Adding to the
+        setPlan(prevPlan => [...newTodaysPlan]);
+
+        // Toast Notification after done
+        toast.success(`Workout logged — nice work`);
+    }
+
+    // Todays Plan Delete Button Handler - Deleting a plan
+    const todaysPlanDeleteHandler = () => {
+        //filter out the deletable data    
+        const newTodaysPlan = plan.filter( data => data.id !== id );
+
+        // Adding to the
+        setPlan(prevPlan => [...newTodaysPlan]);
+
+        // Toast Notification after delete
+        toast.success(`Removed from today's plan`);
+    }
 
     return (
        <>
@@ -46,7 +75,7 @@ function TodaysPlanCard({ todaysPlan } : TodaysPlanCardProps ) {
                         className="inline-flex items-center gap-1">
                             <Flame color="#c4f000" className="w-4" />{caloriesBurned} kcal
                     </span>
-                    <span 
+                    <span
                         className="inline-flex items-center gap-1">
                             <Star color="#c4f000" className="w-4" />{rating}
                     </span>
@@ -56,13 +85,21 @@ function TodaysPlanCard({ todaysPlan } : TodaysPlanCardProps ) {
             {/* Action Buttons */}
             <div className="flex gap-2">
 
-                <button className="btn btn-outline rounded-2xl btn-sm">
-                    View Details
-                </button>
-                <button className="btn rounded-2xl btn-sm bg-brand-primary text-black hover:bg-brand-accent">
+                <Link href={`/${id}`}>
+                    <button className="btn btn-outline rounded-2xl btn-sm">
+                        View Details
+                    </button>
+                </Link>
+
+                <button
+                    onClick={doneButtonHandler}
+                    className="btn rounded-2xl btn-sm bg-brand-primary text-black hover:bg-brand-accent">
                     <Check className="w-4" /> Mark as Done
                 </button>
-                <button className="btn rounded-2xl btn-sm bg-transparent border-none shadow-none w-10">
+
+                <button
+                    onClick={todaysPlanDeleteHandler} 
+                    className="btn rounded-2xl btn-sm bg-transparent border-none shadow-none w-10">
                     <X color="#ffffff" />
                 </button>
 

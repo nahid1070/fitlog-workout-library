@@ -1,15 +1,18 @@
 import { IFitlog } from "@/types/fitlog.type";
 import { Clock, Flame, Star, X } from "lucide-react";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 interface SavedPlanCardProps {
+    save: IFitlog[];
+    setSave: React.Dispatch<React.SetStateAction<IFitlog[] | []>>;
     savedPlan: IFitlog;
 }
 
-function SavedPlanCard({ savedPlan } : SavedPlanCardProps ) {
+function SavedPlanCard({ savedPlan, save, setSave } : SavedPlanCardProps ) {
 
     const {
-
+        id,
         name, 
         image, 
         equipment, 
@@ -18,6 +21,18 @@ function SavedPlanCard({ savedPlan } : SavedPlanCardProps ) {
         rating
 
     } = savedPlan;
+
+    // Todays Plan Delete Button Handler - Deleting a plan
+    const todaysPlanDeleteHandler = () => {
+        //filter out the deletable data    
+        const newTodaysPlan = save.filter( data => data.id !== id );
+
+        // Adding to the
+        setSave(prevSave => [...newTodaysPlan]);
+
+        // Toast Notification after delete
+        toast.success(`Removed from saved`);
+    }
 
     return (
        <>
@@ -60,7 +75,9 @@ function SavedPlanCard({ savedPlan } : SavedPlanCardProps ) {
                     View Details
                 </button>
 
-                <button className="btn rounded-2xl btn-sm bg-transparent w-10">
+                <button
+                    onClick={todaysPlanDeleteHandler} 
+                    className="btn rounded-2xl btn-sm bg-transparent w-10">
                     <X color="#ffffff" />
                 </button>
 
