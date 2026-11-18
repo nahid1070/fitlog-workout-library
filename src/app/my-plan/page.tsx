@@ -1,17 +1,37 @@
 'use client';
 
+import NoFitData from "@/components/my-plan/NoFitData";
+import SavedPlanCard from "@/components/my-plan/SavedPlanCard";
+import TodaysPlanCard from "@/components/my-plan/TodaysPlanCard";
 import { FitLibraryContext } from "@/contexts/FitLibraryContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 function MyPlan() {
+
+    // Declaring State to handle the TodaysPlan and Saved Data
+    const [tab, setTab] = useState('');
 
     // Using Context to get the MyPlan and Save data
     const {plan, save} = useContext(FitLibraryContext);
 
     // Get the Total Duration and Calories From the Plan Data
     const totalMinutes = plan.reduce( (acc, data) => acc + data.duration, 0);
-
     const totalCalories = plan.reduce( (acc, data) => acc + data.caloriesBurned, 0);
+
+    // Plan and Saved Length
+    const hasPlan = plan.length;
+    const hasSaved = save.length;
+
+    // Tabs buttons handler
+    const todaysPlanButtonHandler = () => {
+        setTab('plan');
+    }
+
+    // Tabs buttons handler
+    const savedButtonHandler = () => {
+        setTab('saved');
+    }
+
 
    return (
         <section className="space-y-8">
@@ -41,6 +61,46 @@ function MyPlan() {
                     <div className="stat-value">{totalCalories}</div>
                     
                 </div>
+            </div>
+
+            {/* Todays Plan and Saved Details */}
+            <div className="flex items-center justify-between gap-4">
+                <div role="tablist" className="tabs tabs-box rounded-2xl bg-surface w-fit">
+                    <button
+                        onClick={todaysPlanButtonHandler}
+                        role="tab"
+                        className={`tab rounded-2xl shadow-none ${tab === 'plan' && 'tab-active text-brand-primary bg-black'}`}>
+                        {`Today's`} Plan
+                    </button>
+
+                    <button
+                        onClick={savedButtonHandler} 
+                        role="tab"
+                        className={`tab rounded-2xl shadow-none ${tab === 'saved' && 'tab-active text-brand-primary bg-black'}`}>
+                        Saved
+                    </button>
+                </div>
+
+                <div>
+                    Sorting
+                </div>
+            </div>
+
+            <div className="space-y-4">
+                
+                <NoFitData />
+
+                {
+                    tab === 'saved' ?
+                    save.map( savedPlan => 
+                        <SavedPlanCard key={savedPlan.id} savedPlan={savedPlan} />
+                    ) : 
+
+                    plan.map( todaysPlan => 
+                        <TodaysPlanCard key={todaysPlan.id} todaysPlan={todaysPlan} />
+                    )
+                }
+
             </div>
 
         </section>
