@@ -48,9 +48,9 @@ async function LibraryDetail({ params } : ParamsProps) {
 
     return (
         <>
-        <div className="grid grid-cols-2 gap-10">
-            <div className="relative min-h-72 rounded-2xl overflow-hidden">
-                <Image src={image} width={1200} height={1200} alt="Fit Image" className="object-cover absolute w-full h-full"/>
+        <div className="grid lg:grid-cols-2 gap-10">
+            <div className="relative h-72 lg:min-h-72 rounded-2xl overflow-hidden">
+                <Image src={image} width={1200} height={1200} alt="Fit Image" className="object-cover w-full h-full"/>
             </div>
 
             <div>
@@ -70,7 +70,8 @@ async function LibraryDetail({ params } : ParamsProps) {
                         )
                     }
                 </div>
-
+                
+                {/* Fit Details */}
                 <dl className="mt-6 divide-y divide-brand-border border border-brand-border bg-surface rounded-2xl overflow-hidden">
                     <div className="grid grid-cols-2 items-center px-4 py-3">
                         <dt className="font-heading">Equipment</dt>
@@ -103,7 +104,8 @@ async function LibraryDetail({ params } : ParamsProps) {
                         <dd>{rating}</dd>
                     </div>
                 </dl>
-
+                
+                {/* Instructions */}
                 <h2 className="text-2xl mt-8">Instructions</h2>
 
                 <ol className="mt-4 list-decimal space-y-3 pl-5">
@@ -115,9 +117,7 @@ async function LibraryDetail({ params } : ParamsProps) {
                 </ol>
                 
                 {/* Buttons */}
-                <div className="flex items-center gap-3 mt-6">
-                   
-                    {/* Button */}
+                <div className="flex flex-col sm:flex-row items-center gap-3 mt-6">
                     <LibraryDetailButton fitItemDetails={fitItemDetails} />
                 </div>
 

@@ -75,14 +75,14 @@ function LibraryDetailButton({ fitItemDetails } : LibraryDetailButtonProps) {
         {/* Add To Plan Button */}
         <button
             onClick={ ()=> addToPlanButtonHandler() }
-            className="btn bg-brand-primary text-btn-brand-text rounded-2xl hover:bg-brand-accent">
+            className="btn btn-block bg-brand-primary text-btn-brand-text rounded-2xl hover:bg-brand-accent sm:w-fit sm:btn-md">
             <CalendarPlus className="text-btn-brand-text w-4" /> Add to {`today's`} plan
         </button>
 
         {/* Save for Later Button */}
         <button 
             onClick={ () => saveLaterButtonHandler() }
-            className="btn rounded-2xl btn-outline">
+            className="btn btn-block rounded-2xl btn-outline sm:w-fit  sm:btn-md">
             <Bookmark className="text-brand-heading w-4" /> Save for later
         </button>
         </>
