@@ -1,6 +1,7 @@
 import { IFitlog } from "@/types/fitlog.type";
 import { Clock, Flame, Star, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import toast from "react-hot-toast";
 
 interface SavedPlanCardProps {
@@ -71,9 +72,11 @@ function SavedPlanCard({ savedPlan, save, setSave } : SavedPlanCardProps ) {
             {/* Action Buttons */}
             <div className="flex gap-2">
 
-                <button className="btn btn-outline rounded-2xl btn-sm">
-                    View Details
-                </button>
+               <Link href={`/${id}`}>
+                    <button className="btn btn-outline rounded-2xl btn-sm">
+                        View Details
+                    </button>
+               </Link>
 
                 <button
                     onClick={todaysPlanDeleteHandler} 
