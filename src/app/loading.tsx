@@ -1,9 +1,22 @@
+import BannerSkeleton from "@/components/skeleton/BannerSkeleton";
+import ProfileCardSkeleton from "@/components/skeleton/ProfileCardSkeleton";
+
 function Loading() {
 
     return (
-        <div className="flex items-center justify-center">
-            <h2 className="font-heading">Loading workouts…</h2>
+        <>
+        <div>
+            <BannerSkeleton />
+            <div className="grid grid-cols-3 gap-4 py-8">
+                <ProfileCardSkeleton />
+                <ProfileCardSkeleton />
+                <ProfileCardSkeleton />
+                <ProfileCardSkeleton />
+                <ProfileCardSkeleton />
+                <ProfileCardSkeleton />
+            </div>
         </div>
+        </>
     );
 }
 
