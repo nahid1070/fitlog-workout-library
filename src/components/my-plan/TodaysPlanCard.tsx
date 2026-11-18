@@ -1,5 +1,5 @@
 import { IFitlog } from "@/types/fitlog.type";
-import { Check, Clock, Flame, Star } from "lucide-react";
+import { Check, Clock, Flame, Star, X } from "lucide-react";
 import Image from "next/image";
 
 interface TodaysPlanCardProps {
@@ -62,8 +62,8 @@ function TodaysPlanCard({ todaysPlan } : TodaysPlanCardProps ) {
                 <button className="btn rounded-2xl btn-sm bg-brand-primary text-black hover:bg-brand-accent">
                     <Check className="w-4" /> Mark as Done
                 </button>
-                <button className="btn rounded-2xl btn-sm bg-transparent">
-                    x
+                <button className="btn rounded-2xl btn-sm bg-transparent border-none shadow-none w-10">
+                    <X color="#ffffff" />
                 </button>
 
             </div>

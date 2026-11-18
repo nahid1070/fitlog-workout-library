@@ -15,8 +15,12 @@ function MyPlan() {
     const {plan, save} = useContext(FitLibraryContext);
 
     // Get the Total Duration and Calories From the Plan Data
-    const totalMinutes = plan.reduce( (acc, data) => acc + data.duration, 0);
-    const totalCalories = plan.reduce( (acc, data) => acc + data.caloriesBurned, 0);
+    const totalPlanMinutes = plan.reduce( (acc, data) => acc + data.duration, 0);
+    const totalPlanCalories = plan.reduce( (acc, data) => acc + data.caloriesBurned, 0);
+
+    // Get the Total Duration and Calories From the Saved Data
+    const totalSavedMinutes = save.reduce( (acc, data) => acc + data.duration, 0);
+    const totalSavedCalories = save.reduce( (acc, data) => acc + data.caloriesBurned, 0);
 
     // Plan and Saved Length
     const hasPlan = plan.length;
@@ -46,19 +50,25 @@ function MyPlan() {
             <div className="stats stats-vertical lg:stats-horizontal shadow-none w-full bg-surface rounded-2xl border border-brand-border">
                 <div className="stat">
                     <div className="stat-title">Exercises</div>
-                    <div className="stat-value text-brand-primary">{plan.length}</div>
+                    <div className="stat-value text-brand-primary">
+                        { tab === 'saved' ? save.length : plan.length }
+                    </div>
                    
                 </div>
 
                 <div className="stat">
                     <div className="stat-title">Minutes</div>
-                    <div className="stat-value">{totalMinutes}</div>
+                    <div className="stat-value">
+                        { tab === 'saved' ? totalSavedMinutes : totalPlanMinutes }
+                    </div>
                   
                 </div>
 
                 <div className="stat">
                     <div className="stat-title">Calories</div>
-                    <div className="stat-value">{totalCalories}</div>
+                    <div className="stat-value">
+                        { tab === 'saved' ? totalSavedCalories : totalPlanCalories }
+                    </div>
                     
                 </div>
             </div>
