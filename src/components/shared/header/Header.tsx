@@ -1,8 +1,9 @@
-
 import Link from "next/link";
+import NavButtons from "./Navbuttons";
 
 function Header() {
   
+  // NavLink Items
   const navLins = <>
     <li>
           <Link href={'/'} className="rounded-[0.73rem] text-brand-heading"> Workouts</Link>
@@ -57,9 +58,10 @@ function Header() {
             {navLins}
           </ul>
         </div>
+
+        {/* Nav Buttons */}
         <div className="navbar-end gap-2">
-          <button className="btn">Plan</button>
-          <button className="btn">Saved</button>
+            <NavButtons />
         </div>
     </div>
     </header>

@@ -1,9 +1,20 @@
+import LibraryDetailButton from "@/components/shared/libraryDetail/LibraryDetailButton";
 import { IFitlog } from "@/types/fitlog.type";
-import { Bookmark, CalendarPlus } from "lucide-react";
 import Image from "next/image";
 
 interface ParamsProps {
     params: Promise<{ libraryId: string }>
+}
+
+// Fething Fit Item's Detail Data
+const getAllFitLibraryData = async () : Promise<IFitlog[]> => {
+    const res = await fetch('https://api.abcz.workers.dev/api/fitlog/');
+
+    if (!res.ok) {
+        console.log('Fetch Erro Occured', res.status);
+    }
+
+    return await res.json();
 }
 
 async function LibraryDetail({ params } : ParamsProps) {
@@ -11,21 +22,15 @@ async function LibraryDetail({ params } : ParamsProps) {
     // Getting Fit Item ID
     const { libraryId } = await params;
 
-    // Fething Fit Item's Detail Data
-    const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${libraryId}`)
+    // Getting FitLog data in an array
+    const fitLibraryData = await getAllFitLibraryData();
 
-    if (!res.ok) {
-        console.log('Fetch Erro Occured', res.status);
-    }
-    
-    const fitItemDetails : IFitlog = await res.json();
+    const fitItemDetails = fitLibraryData.find( fitData => fitData.id === Number(libraryId) ) as IFitlog;
 
-    console.log(fitItemDetails);
 
     // Distructuring the Fit Item Information
     const {
 
-        id,
         name,
         image,
         muscleGroups,
@@ -112,12 +117,8 @@ async function LibraryDetail({ params } : ParamsProps) {
                 {/* Buttons */}
                 <div className="flex items-center gap-3 mt-6">
                    
-                    <button className="btn bg-brand-primary text-btn-brand-text rounded-2xl hover:bg-brand-accent">
-                        <CalendarPlus className="text-btn-brand-text w-4" /> Add to {`today's`} plan
-                    </button>
-                  
-
-                    <button className="btn rounded-2xl btn-outline"><Bookmark className="text-brand-heading w-4" /> Save for later</button>
+                    {/* Button */}
+                    <LibraryDetailButton fitItemDetails={fitItemDetails} />
                 </div>
 
             </div>

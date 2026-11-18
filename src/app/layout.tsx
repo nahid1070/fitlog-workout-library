@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import {Inter, Oswald } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/shared/Header";
+import Header from "@/components/shared/header/Header";
 import Footer from "@/components/shared/Footer";
+import FitLibraryProvider from "@/contexts/FitLibraryContext";
+import { Toaster } from "react-hot-toast";
 
 const oswald = Oswald({
   variable: "--font-oswald",
@@ -26,17 +28,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${oswald.variable} ${inter.variable} h-full antialiased`}
     >
-      <body>
-        {/* Header */}
-        <Header />
+      <body className="min-h-screen">
+        <FitLibraryProvider>
+          {/* Header */}
+          <Header />
+          {/* Main Content */}
+          <main className="w-full min-h-[80vh] max-w-6xl mx-auto px-4 py-8 space-y-12">
 
-        {/* Main Content */}
-        <main className="w-full max-w-6xl mx-auto px-4 py-8 space-y-12">
-          {children}
-        </main>
+            {children}
 
-        {/* Footer */}
-        <Footer />
+          </main>
+          {/* Footer */}
+          <Footer />
+
+          <Toaster position="top-right" />
+        </FitLibraryProvider>
       </body>
     </html>
   );
