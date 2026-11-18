@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 function Banner() {
 
@@ -8,7 +9,9 @@ function Banner() {
                 <p className="font-heading text-sm uppercase text-brand-primary!">Workout Library</p>
                 <h1 className="text-4xl sm:text-5xl leading-tight">Train with intent. Log every set.</h1>
                 <p className="max-w-md text-brand-text">FitLog is a dark, no-nonsense gym companion: pick a lift, lock it into {"today's"} plan, and watch the {"week's"} work add up.</p>
-                <button className="btn bg-brand-primary text-btn-brand-text rounded-2xl">Browse Workouts</button>
+                <Link href={'/#library'}>
+                    <button className="btn bg-brand-primary text-btn-brand-text rounded-2xl">Browse Workouts</button>
+                </Link>
             </div>
 
             <div>

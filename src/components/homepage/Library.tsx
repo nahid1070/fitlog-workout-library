@@ -7,7 +7,7 @@ const getFitlogData = async () => {
 
     try{
 
-        const res = await fetch('https://api.abcz.workers.dev/api/fitlog', { cache: 'no-store' });
+        const res = await fetch('https://api.abcz.workers.dev/api/fitlog', { cache: 'force-cache' });
 
         if (!res.ok) {
             throw new Error(`HTTP error! Status: ${res.status}`);
@@ -27,7 +27,7 @@ async function Library() {
     const fitlogAllData: IFitlog[] = await getFitlogData();
 
     return (
-        <section>
+        <section id="library">
             {/* Section Title */}
             <div>
                 <h2 className="text-3xl">The Library</h2>
