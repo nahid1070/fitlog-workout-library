@@ -19,7 +19,7 @@ function Header() {
   </>
   
   return (
-    <header className="bg-brand-body border-b border-brand-border shadow-sm">
+    <header className="bg-brand-body border-b border-brand-border shadow-sm sticky top-0 z-99">
       <div className="navbar w-full max-w-6xl mx-auto">
         <div className="navbar-start">
           {/* Mobile Menu Part */}
