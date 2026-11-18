@@ -9,7 +9,7 @@ import { useContext, useState } from "react";
 function MyPlan() {
 
     // Declaring State to handle the TodaysPlan and Saved Data
-    const [tab, setTab] = useState('');
+    const [tab, setTab] = useState('plan');
 
     // Using Context to get the MyPlan and Save data
     const {plan, save} = useContext(FitLibraryContext);
@@ -87,18 +87,29 @@ function MyPlan() {
             </div>
 
             <div className="space-y-4">
-                
-                <NoFitData />
+    
+                {
+
+                    // If Saved Data is Available
+                    tab === 'saved' && hasSaved > 0 ?
+                        save.map( savedPlan => 
+                        <SavedPlanCard key={savedPlan.id} savedPlan={savedPlan} />
+
+                    ) : 
+                    // If it's saved tab and not data is available
+                    tab !== 'plan' && <NoFitData /> 
+                }
 
                 {
-                    tab === 'saved' ?
-                    save.map( savedPlan => 
-                        <SavedPlanCard key={savedPlan.id} savedPlan={savedPlan} />
-                    ) : 
-
-                    plan.map( todaysPlan => 
+                    // If TodaysPlan Data is Available
+                    tab === 'plan' && hasPlan > 0 ?
+                        plan.map( todaysPlan => 
                         <TodaysPlanCard key={todaysPlan.id} todaysPlan={todaysPlan} />
-                    )
+
+                    ) : 
+                    
+                    // If it's plan tab and not data is available
+                    tab !== 'saved' && <NoFitData /> 
                 }
 
             </div>
