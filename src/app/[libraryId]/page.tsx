@@ -1,6 +1,7 @@
 import LibraryDetailButton from "@/components/shared/libraryDetail/LibraryDetailButton";
 import { IFitlog } from "@/types/fitlog.type";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 interface ParamsProps {
     params: Promise<{ libraryId: string }>
@@ -26,6 +27,11 @@ async function LibraryDetail({ params } : ParamsProps) {
     const fitLibraryData = await getAllFitLibraryData();
 
     const fitItemDetails = fitLibraryData.find( fitData => fitData.id === Number(libraryId) ) as IFitlog;
+
+    // Sending to custom Error Page if url doesn't match
+    if (!fitItemDetails) {
+        notFound();
+    }
 
 
     // Distructuring the Fit Item Information
