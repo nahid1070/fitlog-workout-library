@@ -5,6 +5,7 @@ import Header from "@/components/shared/header/Header";
 import Footer from "@/components/shared/Footer";
 import FitLibraryProvider from "@/contexts/FitLibraryContext";
 import { Toaster } from "react-hot-toast";
+import { Suspense } from "react";
 
 const oswald = Oswald({
   variable: "--font-oswald",
@@ -31,7 +32,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-screen flex-col">
         <FitLibraryProvider>
           {/* Header */}
-          <Header />
+          
+          <Suspense>
+            <Header />
+          </Suspense>
+
           {/* Main Content */}
           <main className="w-full min-h-[80vh] max-w-6xl mx-auto px-4 py-8 space-y-12">
 

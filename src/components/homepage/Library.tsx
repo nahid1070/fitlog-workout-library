@@ -5,7 +5,7 @@ import LibraryCard from "../shared/LibraryCard";
 const getFitlogData = async () => {
     try{
 
-        const res = await fetch('https://api.abcz.workers.dev/api/fitlog');
+        const res = await fetch('https://api.abcz.workers.dev/api/fitlog', {'next' : {'revalidate' : 600}});
 
         if (!res.ok) {
             throw new Error(`HTTP error! Status: ${res.status}`);
